@@ -2,3 +2,6 @@
 
 ### GET home
 GET {{BASE_URL}}/
+
+### GET users
+GET {{BASE_URL}}/users
