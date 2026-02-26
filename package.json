@@ -5,7 +5,9 @@
   "main": "server.js",
   "scripts": {
     "dev": "node --watch ./src/server.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "seed2": "node ./prisma/seed2.js",
+    "seed3": "node ./prisma/seed3.js"
   },
   "keywords": [],
   "author": "",
@@ -17,6 +19,7 @@
     "express": "^5.2.1"
   },
   "devDependencies": {
+    "@faker-js/faker": "^10.3.0",
     "prisma": "^7.4.1"
   }
 }

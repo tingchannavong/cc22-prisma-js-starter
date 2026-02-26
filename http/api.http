@@ -5,3 +5,22 @@ GET {{BASE_URL}}/
 
 ### GET users
 GET {{BASE_URL}}/users
+
+### GET posts
+GET {{BASE_URL}}/posts
+
+### GEt user id
+GET {{BASE_URL}}/users/1
+
+### create user
+POST {{BASE_URL}}/users
+Content-Type: application/json
+
+{
+            "age": 27,
+            "email": "kitti@hotmail.com",
+            "name": "kitty"
+}
+
+### product count
+GET  {{BASE_URL}}/products/count
