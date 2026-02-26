@@ -65,6 +65,79 @@ app.get('/products/count', async (re, res) => {
     res.json({count});
 });
 
+app.get('/products/detail', async (re, res) => {
+    // aggregate can find sum, avg, min, max
+    const result = await prisma.product.aggregate({
+        _sum: {
+            price: true,
+            stock: true
+        },
+        _avg: {
+            price: true
+        },
+        _min: {
+            price: true
+        },
+        _max: {
+            stock: true
+        },
+        _count: {
+            _all: true
+        }
+    }); 
+
+    const cheapProducts = await prisma.product.findMany({
+        where: {
+            name: {
+                contains: 'silk',
+            },
+            price: {
+                lte: 100 // less than or equal to 100
+            },
+            stock: {
+                gt: 5 // greather than 5
+            }
+        }
+    });
+
+    res.json( {cheapProducts, result} );
+});
+
+
+app.get('/orders/productgroups', async (re, res) => {
+     // group by
+    const grouped = await prisma.orderItem.groupBy({
+    by: ['productId'],
+    _count: {
+        _all: true,
+    },
+    });
+
+    // useful irl
+        const productsWithCount = await prisma.product.findMany({
+        select: {
+            id: true,
+            name: true,
+            _count: {
+                select: { orderItems: true }
+            }
+        }
+    });
+
+    res.json( {grouped, productsWithCount});
+});
+
+app.get('/posts/userid', async (re, res) => {
+    // distinct user who has written post
+    const uniqueUsers = await prisma.post.findMany({
+    distinct: ['userId'],
+    select: {
+        userId: true
+    }
+    });
+    res.json(uniqueUsers);
+});
+
 app.listen(PORT, () => {
     console.log(`Server is running http://localhost:${PORT}`);
 });

@@ -24,3 +24,12 @@ Content-Type: application/json
 
 ### product count
 GET  {{BASE_URL}}/products/count
+
+### product aggregate
+GET {{BASE_URL}}/products/detail
+
+### get distinct post user id
+GET {{BASE_URL}}/posts/userid
+
+### get count of product by group
+GET {{BASE_URL}}/orders/productgroups
